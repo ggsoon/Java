@@ -1,7 +1,7 @@
 public class PracticeBoo {
     public static void main(String[] args) {
         // String foo = true(reserved word)
-        String foo = "hehe man!";
+        String foo = "hehe man";
         System.out.println(foo.contains("hehe")); // 포함되면 true 아니면 false 반환
         boolean what = foo.contains("man");
         if (what) {
