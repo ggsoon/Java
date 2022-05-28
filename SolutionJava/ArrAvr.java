@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.*;
 
 public class ArrAvr {
     public static void main(String[] args) {
