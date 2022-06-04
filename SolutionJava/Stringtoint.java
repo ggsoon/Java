@@ -3,6 +3,6 @@ public class Stringtoint {
             int answer = 0;
             String s = "-1234";
             answer = Integer.parseInt(s);
-        System.out.println(answer);
+            System.out.println(answer);
     }
 }
