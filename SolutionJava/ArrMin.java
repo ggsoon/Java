@@ -17,5 +17,6 @@ public class ArrMin {
          }
         }
        // System.out.println(X[0] = -1);
+        // stream은 느리므로 조심
     }
 }
