@@ -1,6 +1,7 @@
 // Do it! 자료구조와 함께 배우는 알고리즘 입문 자바편을 직접 푼 코드.
 // chapter.03 검색
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 class SeqSearch {
@@ -60,8 +61,8 @@ public class BeginnerAlgorithms4 {
         Scanner stdIn = new Scanner(System.in);
 
         // 순차 검색
-        System.out.println("요솟수: ");
-        int num = stdIn.nextInt();
+//      System.out.println("요솟수: ");
+//        int num = stdIn.nextInt();
 //        int[] x = new int[num];
 //
 //        for (int i = 0; i < num; i++) {
@@ -92,23 +93,35 @@ public class BeginnerAlgorithms4 {
 //        else System.out.println(key + "는 x[" + idx + "]");
 
         // 이진 검색
-        int[] x = new int[num];
-        System.out.println("오름차순으로 입력하세요: ");
-        System.out.println("x[0]: "); // 첫 요소 입력
-        x[0] = stdIn.nextInt();
-        
-        for (int i = 1; i < num; i++) {
-            do {
-                System.out.println("x[" + i + "]:");
-                x[i] = stdIn.nextInt();
-            } while (x[i] < x[i-1]); // 오름차순이 아니면 다시 입력
-        }
+//        int[] x = new int[num];
+//        System.out.println("오름차순으로 입력하세요: ");
+//        System.out.println("x[0]: "); // 첫 요소 입력
+//        x[0] = stdIn.nextInt();
+//
+//        for (int i = 1; i < num; i++) {
+//            do {
+//                System.out.println("x[" + i + "]:");
+//                x[i] = stdIn.nextInt();
+//            } while (x[i] < x[i-1]); // 오름차순이 아니면 다시 입력
+//        }
+//
+//        System.out.println("검색할 값:");
+//        int key = stdIn.nextInt();
+//        int idx = BinSearch.binSearch(x, num, key);
+//        //int idx = Arrays.binarySearch(x, key);
+//
+//        if (idx == -1) System.out.println("그 값은 배열에 없습니다");
+//        else System.out.println(key + "는 x[" + idx + "]에 있습니다");
 
-        System.out.println("검색할 값:"); 
-        int key = stdIn.nextInt();
-        int idx = BinSearch.binSearch(x, num, key);
-        
-        if (idx == -1) System.out.println("그 값은 배열에 없습니다");
-        else System.out.println(key + "는 x[" + idx + "]에 있습니다");
+        // 자연 정렬1
+        String[] x = {"static", "volatile", "instanceof", "assert"};
+        System.out.print("원하는 키워드는: ");
+        String key = stdIn.next();
+        int idx = Arrays.binarySearch(x, key); // 배열 x에서 key 검색
+
+        if (idx < 0) System.out.println("해당 키워드가 없습니다.");
+        else System.out.println("해당 키워드는 x[" + idx + "]에 있습니다.");
+
+        // 자연 정렬
     }
 }
