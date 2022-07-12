@@ -2,6 +2,7 @@
 // chapter.03 검색
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Scanner;
 
 class SeqSearch {
@@ -53,6 +54,43 @@ class BinSearch {
 
         } while (pl <= pr);
         return -1; // 검색 실패
+    }
+}
+
+class PhysExamSearch {
+    static class PhyscData {
+        private String name;
+        private int height;
+        private double vision;
+
+        public PhyscData(String name, int height, double vision) {
+            this.name = name; this.height = height; this.vision = vision;
+        }
+        public String toString() {
+            return name + " " + height + " " + vision;
+        }
+
+        public static final Comparator<PhyscData> HEIGHT_ORDER
+                = new HeightOrderComparator();
+
+        private static class HeightOrderComparator implements Comparator<PhyscData> {
+            public int compare(PhyscData d1, PhyscData d2) {
+                return (d1.height > d2.height) ? 1 :
+                        (d1.height < d2.height) ? -1 : 0;
+            }
+        }
+    }
+}
+
+class GenericClassTest { // 제네릭은 자료형에 의존하지 않는 범용 클래스(인터페이스) 구현 방식
+    static class GenericClass<T> {
+        private T n;
+        GenericClass(T t) { // 생성자
+            this.n = t;
+        }
+        T getn() {
+            return n;
+        }
     }
 }
 
@@ -114,14 +152,28 @@ public class BeginnerAlgorithms4 {
 //        else System.out.println(key + "는 x[" + idx + "]에 있습니다");
 
         // 자연 정렬1
-        String[] x = {"static", "volatile", "instanceof", "assert"};
-        System.out.print("원하는 키워드는: ");
-        String key = stdIn.next();
-        int idx = Arrays.binarySearch(x, key); // 배열 x에서 key 검색
+//        String[] x = {"static", "volatile", "instanceof", "assert"};
+//        System.out.print("원하는 키워드는: ");
+//        String key = stdIn.next();
+//        int idx = Arrays.binarySearch(x, key); // 배열 x에서 key 검색
+//
+//        if (idx < 0) System.out.println("해당 키워드가 없습니다.");
+//        else System.out.println("해당 키워드는 x[" + idx + "]에 있습니다.");
 
-        if (idx < 0) System.out.println("해당 키워드가 없습니다.");
-        else System.out.println("해당 키워드는 x[" + idx + "]에 있습니다.");
-
-        // 자연 정렬
+        // 자연 정렬2
+        PhysExamSearch.PhyscData[] x = {
+                new PhysExamSearch.PhyscData("가나다", 160, 0.5),
+                new PhysExamSearch.PhyscData("마바사", 180, 0.3),
+                new PhysExamSearch.PhyscData("abc", 170, 1.0),
+        };
+        System.out.print("몇 cm를 찾을까? : ");
+        int height = stdIn.nextInt();
+        int idx = Arrays.binarySearch(x, new PhysExamSearch.PhyscData("", height, 0.0),
+                PhysExamSearch.PhyscData.HEIGHT_ORDER);
+        if (idx < 0) System.out.println("요소가 없습니다");
+        else {
+            System.out.println("x[" + idx + "]에 있습니다");
+            System.out.println("찾은 데이터는 " + x[idx]);
+        }
     }
 }
