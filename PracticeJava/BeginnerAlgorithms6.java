@@ -30,6 +30,40 @@ class Recur { // 하향식, 상향식으로 이해해보기
             recur(n - 2);
         }
     }
+
+    static void recurStack(int n) {
+        IntStack s = new IntStack(n);
+
+        while (true) {
+            if (n > 0) {
+                s.push(n);
+                n = n - 1;
+                continue;
+            }
+            if (s.isEmpty() != true) {
+                n = s.pop();
+                System.out.print(n + " ");
+                n = n - 2;
+                continue;
+            }
+            break;
+        }
+    }
+
+    static class Hanoi { // 바닥원반이 아닌 원반들을 그룹으로 함
+                 // 그룹을 중간기둥으로 옮기고 바닥원반을 목표 기둥으로
+                 // 그룹을 중간 기둥에서 목표 기둥으로
+        static void move(int no, int x, int y) { // no 원반수 x에서 y로 옮김 6-x-y 중간기둥
+            if (no > 1)
+                move(no - 1, x, 6 - x - y);
+            System.out.println("원반 [" + no + "]을" +
+                    x + "기둥에서 " + y + "기둥으로 옮김");
+
+            if (no > 1)
+                move(no - 1, 6 - x - y, y);
+        }
+
+    }
 }
 
 public class BeginnerAlgorithms6 {
@@ -43,5 +77,11 @@ public class BeginnerAlgorithms6 {
         System.out.println(x + "의 팩토리얼은 " + Factorial.factorial(x));
         System.out.println("최대공약수는 " + EuclidGCD.gcd(x, y) + "입니다.");
         Recur.recur(x);
+        Recur.recurStack(x);
+
+        System.out.println();
+        System.out.print("하노이의 탑 원반 개수 : ");
+        int n = stdIn.nextInt();
+        Recur.Hanoi.move(n, 1, 3);
     }
 }
