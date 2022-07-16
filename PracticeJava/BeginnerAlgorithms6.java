@@ -66,22 +66,72 @@ class Recur { // 하향식, 상향식으로 이해해보기
     }
 }
 
+class EightQueen {
+    static boolean[] flag = new boolean[8]; // 각 행에 퀸 배치했는지 체크
+
+    static boolean[] flag_b = new boolean[15]; // ↙대각선 방향으로 퀸 배치 체크
+    static boolean[] flag_c = new boolean[15]; // ↘대각선 방향으로 퀸 배치 체크
+    static int[] pos = new int[8]; // 배열은 열 값은 행
+
+    // 각 열의 퀸 위치 출력
+    static void print() {
+        for (int i = 0; i < 8; i++)
+            System.out.printf("%2d", pos[i]);
+        System.out.println();
+    }
+
+    // 각 행에 퀸을 1개만 배치
+    static void EightRook(int i) {
+        for (int j = 0; j < 8; j++) {
+            if (flag[j] == false) // j행에는 퀸이 아직 배치가 안됬다면
+                pos[i] = j; // 퀸을 j행에 배치한다
+                if (i == 7) // 모든 열에 배치한 경우
+                    print();
+                else {
+                    flag[j] = true;
+                    EightRook(i + 1);
+                    flag[j] = false;
+                }
+        }
+    }
+
+    static void eightqueen(int i) {
+        for (int j = 0; j < 8; j++) {
+            if (flag[j] == false &&
+                flag_b[i + j] == false &&
+                flag_c[i - j + 7] == false) {
+              pos[i] = j;
+              if (i == 7)
+                  print();
+              else {
+                  flag[j] = flag_b[i + j] = flag_c[i - j + 7] = true;
+                  eightqueen(i + 1);
+                  flag[j] = flag_b[i + j] = flag_c[i - j + 7] = false;
+              }
+            }
+        }
+    }
+}
+
 public class BeginnerAlgorithms6 {
     public static void main(String[] args) {
         Scanner stdIn = new Scanner(System.in);
-        System.out.println("x 정수를 입력하세요: ");
-        int x = stdIn.nextInt();
-        System.out.println("y 정수를 입력하세요: ");
-        int y = stdIn.nextInt();
+//        System.out.println("x 정수를 입력하세요: ");
+//        int x = stdIn.nextInt();
+//        System.out.println("y 정수를 입력하세요: ");
+//        int y = stdIn.nextInt();
+//
+//        System.out.println(x + "의 팩토리얼은 " + Factorial.factorial(x));
+//        System.out.println("최대공약수는 " + EuclidGCD.gcd(x, y) + "입니다.");
+//        Recur.recur(x);
+//        Recur.recurStack(x);
+//
+//        System.out.println();
+//        System.out.print("하노이의 탑 원반 개수 : ");
+//        int n = stdIn.nextInt();
+//        Recur.Hanoi.move(n, 1, 3);
 
-        System.out.println(x + "의 팩토리얼은 " + Factorial.factorial(x));
-        System.out.println("최대공약수는 " + EuclidGCD.gcd(x, y) + "입니다.");
-        Recur.recur(x);
-        Recur.recurStack(x);
-
-        System.out.println();
-        System.out.print("하노이의 탑 원반 개수 : ");
-        int n = stdIn.nextInt();
-        Recur.Hanoi.move(n, 1, 3);
+        EightQueen.EightRook(0);
+        EightQueen.eightqueen(0);
     }
 }
